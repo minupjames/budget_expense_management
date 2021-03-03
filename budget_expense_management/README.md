@@ -11,35 +11,35 @@
     
     **Annual Summary**
     
-    ![Annual Summary](https://github.com/minupjames/budget-management-app/blob/master/screenshots/Annual%20Summary.png)
+    ![Annual Summary](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/Annual%20Summary.png)
     
     **Monthly Summary**
     
-    ![Monthly Summary](https://github.com/minupjames/budget-management-app/blob/master/screenshots/MonthlySummary.png)
+    ![Monthly Summary](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/MonthlySummary.png)
     
     **Expense Summary**
     
-    ![Expense Summary](https://github.com/minupjames/budget-management-app/blob/master/screenshots/ExpenseSummary.png)
+    ![Expense Summary](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/ExpenseSummary.png)
     
     **Income Summary**
     
-    ![Income Summary](https://github.com/minupjames/budget-management-app/blob/master/screenshots/IncomeSummary.png)
+    ![Income Summary](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/IncomeSummary.png)
     
     **Create/List Bank Accounts**
     
-    ![Bank Accounts](https://github.com/minupjames/budget-management-app/blob/master/screenshots/BankAccount.png)
+    ![Bank Accounts](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/BankAccount.png)
     
     **Create/Edit Expense Category**
     
-    ![Expense Category](https://github.com/minupjames/budget-management-app/blob/master/screenshots/ExpenseCategory.png)
+    ![Expense Category](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/ExpenseCategory.png)
     
     **Create/Edit Income Category**
     
-    ![Income category](https://github.com/minupjames/budget-management-app/blob/master/screenshots/Incomecategory.png)
+    ![Income category](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/Incomecategory.png)
     
     **Cash Transfer**
     
-    ![Cash Transfer](https://github.com/minupjames/budget-management-app/blob/master/screenshots/CashTransfer.png)
-    ![Cash Transfer Backend](https://github.com/minupjames/budget-management-app/blob/master/screenshots/CashTransferBacked.png)
+    ![Cash Transfer](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/CashTransfer.png)
+    ![Cash Transfer Backend](https://github.com/minupjames/budget_expense_management/blob/master/budget_expense_management/screenshots/CashTransferBacked.png)
     
     
