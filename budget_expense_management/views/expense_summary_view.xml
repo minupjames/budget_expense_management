@@ -44,7 +44,7 @@
                     	<group>
                     		
                     		<field name="account_journal_id"  required="1"/>
-                    		<field name="amount"  required="1" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    		<field name="amount"  required="1" />
                     	</group>
                     </group>
                     <div>

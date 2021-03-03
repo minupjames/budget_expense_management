@@ -7,6 +7,7 @@
     'category': 'Tools',
     'summary': 'Personal Monthly Budget Expense Application',
     'description': "",
+    'license':'LGPL-3',
     'author':'Minu James',
     'depends': [
         'base','portal','website','web'
@@ -33,5 +34,5 @@
     'installable': True,
     'application': True,
     'auto_install': False,
-    'test-enable':True
+    "images":['static/description/banner.jpg'],
 }

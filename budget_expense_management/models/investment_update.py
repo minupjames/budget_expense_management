@@ -37,3 +37,4 @@ class InvestmentInterest(models.Model):
             income_summary = self.env['income.summary'].search([('investment_id','=',self.id)])
             income_summary.unlink()
         return super(InvestmentInterest, self).unlink()
+    

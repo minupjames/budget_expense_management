@@ -1,7 +1,6 @@
 odoo.define('budget_expense_management.Chatter', function (require) {
 "use strict";
 
-console.log('fff00');
 var chatter = require('mail.Chatter');
 var core = require('web.core');
 var _t = core._t;

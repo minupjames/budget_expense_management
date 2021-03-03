@@ -37,7 +37,7 @@
                                           <tree editable="bottom" string="Budget Expense">
                                             <field name="category_id" />
                                               <field name="currency_id" invisible="1"/>
-                                        <field name="amount"  widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                       <field name="amount"   />
                                           </tree>
                                       </field>
                                   </div>
@@ -48,7 +48,7 @@
                               <div class="oe_subtotal_footer_separator oe_inline o_td_label" style="font-size:1.3em;">
                                     <label for="amount_total" />
                                 </div>
-                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" />
                             <div class="oe_clear"/>
                         </group>
                 </sheet>

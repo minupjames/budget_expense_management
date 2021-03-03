@@ -13,3 +13,8 @@ class AccountMoneyTransfer(models.Model):
     amount = fields.Float('Amount',copy=False)
     source_journal_id = fields.Many2one('bank.account','Source Account')
     dest_journal_id = fields.Many2one('bank.account','Destination Account')
+
+
+class Users(models.Model):
+    _inherit = 'res.users'
+    currency_id = fields.Many2one('res.currency', string='Currency')
