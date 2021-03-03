@@ -1,5 +1,6 @@
 ## **Budgent-Management-App**
- - Budget management module (for Odoo 12) developed to track and manage household expenses. 
+ - Budget management module (for Odoo 12) developed to track and manage household expenses.
+ - Odoo AppStore - https://apps.odoo.com/apps/modules/12.0/budget_expense_management/ 
  - Features include 
     - Option to budget income/expense for a month. 
     - Add/list new income/expense. 
