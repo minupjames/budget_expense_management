@@ -73,7 +73,6 @@ class BudgetMonthlyReport(http.Controller):
                                                               ('date','>=', first_day),
                                                               ('date','<=', last_day),
                                                               ('exp_category_id','=',categ.id)])
-            
             for exp in expenses:
                 sum += exp.amount
             if sum == 0:
@@ -145,7 +144,6 @@ class BudgetMonthlyReport(http.Controller):
         for year in year_ids:
             years.append(year.name)
         today = fields.Date.today()
-        
         if 'current_month' in request.httprequest.args or 'current_year' in request.httprequest.args:
             current_month = request.httprequest.args['current_month']
             current_year = request.httprequest.args['current_year']
@@ -158,7 +156,6 @@ class BudgetMonthlyReport(http.Controller):
             first_day = date(int(current_year), today.month, 1)
             last_day_of_month = calendar.monthrange(int(current_year), today.month)[1]
             last_day = date(int(current_year), today.month, last_day_of_month)
-
         vals = {'month': self.get_all_months(),
                      'current_month': current_month,
                      'years':years,
@@ -339,5 +336,4 @@ class BudgetMonthlyReport(http.Controller):
             'investment_total': self.account_sum(),
             'savings_total': self.account_sum(investment_acc=False)
             }
-        print('-------------',vals['net_worth'],vals['investment_total'],vals['savings_total'])
         return request.render("budget_expense_management.annual_summary_report_template", vals)

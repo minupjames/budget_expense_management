@@ -4,6 +4,8 @@
     <template id="assets_frontend_exp" name="account new assets" inherit_id="website.assets_frontend" active="True">
          <xpath expr="." position="inside">
            <link rel="stylesheet" href="/budget_expense_management/static/src/css/budget.css"/>
+           </xpath>
+           <xpath expr="script[last()]" position="after">
            <script  type="text/javascript" src="/budget_expense_management/static/src/js/change_month.js" />
            <script  type="text/javascript" src="/budget_expense_management/static/src/js/annual_summary_year.js" />
 		   <script  type="text/javascript" src="/budget_expense_management/static/src/js/expense_form_submit.js" />

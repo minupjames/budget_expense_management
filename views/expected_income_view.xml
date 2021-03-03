@@ -60,9 +60,7 @@
 	    <field name="view_type">form</field>
 	    <field name="view_mode">tree,form</field>	    
 	</record>
-	
-	
-	
+
 	<menuitem id="menu_expected_income"
 	            name="Expected Income"
 	            action="action_expected_income"
@@ -118,7 +116,5 @@
 	            action="inc_ctg_action"
 	            parent="menu_budget_config"
 	             />
-
-	
 	</data>
 </odoo>

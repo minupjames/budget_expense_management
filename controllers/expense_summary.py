@@ -7,21 +7,10 @@ from .main import mypager
 PPG = 20
 from odoo.addons.website.controllers.main import Website
 
-# class BudgetWebsite(Website):
-#     
-#     @http.route(website=True, auth="user")
-#     def web_login(self, redirect=None, *args, **kw):
-#         response = super(BudgetWebsite, self).web_login(redirect=redirect, *args, **kw)
-#         if request.env['res.users'].browse(request.uid).has_group('budget_expense_management.budget_admin'):
-#             redirect = request.redirect('/budget_monthly_rpt/')
-#             return http.redirect_with_hash(redirect)
-#         return response
-#     
-    
+ 
 class ExpenseSummary(http.Controller):
 
-    
-    
+
     @http.route('/expense_form', type='http', method="GET", auth='user', website=True, csrf=False)
     def render_expense_form(self, **kwargs):
         """
@@ -74,7 +63,8 @@ class ExpenseSummary(http.Controller):
                     if data['location']:
                         exp_id.location = data['location']
                     if data['amount']:
-                        exp_id.amount = float(data['amount'].replace(',',''))
+                        newdata = data['amount'].replace('$','').replace(',', '')
+                        exp_id.amount = float(newdata)
             except Exception as exc:
                 print(exc)
                 Response.status = "400"
@@ -119,7 +109,6 @@ class ExpenseSummary(http.Controller):
             post["ppg"] = ppg
         else:
             ppg = PPG
-        print('============show_expense',request.env.user.has_group('budget_expense_management.budget_admin'),request.env.user.has_group('budget_expense_management.budget_user'))
         expense_summary = request.env['expense.summary']
         domain = [('date','<=',fields.Date.today())]
         expenses = expense_summary.sudo().search(domain, order=post.get('order'))

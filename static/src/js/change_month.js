@@ -1,6 +1,5 @@
-odoo.define('budget_expense_management.change_month', function(require) { 
-	 "use strict" 
-	
+odoo.define('budget_expense_management.change_month', function(require) {
+	 "use strict"
 	$(document).ready(function() {
 		function update_summary(month_name,year){
 			var xhttp = new XMLHttpRequest();
@@ -15,7 +14,7 @@ odoo.define('budget_expense_management.change_month', function(require) {
 			xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 			xhttp.send();
 		};
-		
+
 		$("#change_month").change(function() {
 			var month_name = $("#change_month").val();
 			var b_year = $("#change_year").val();
@@ -28,8 +27,10 @@ odoo.define('budget_expense_management.change_month', function(require) {
 			sessionStorage.setItem("SelYear", s_year);
 			update_summary(month_name, s_year);
 		});
+
 	});
-	
+
+
 	window.onload = function() {
 	    var selItem = sessionStorage.getItem("SelItem");
 		var SelYear = sessionStorage.getItem("SelYear");
@@ -47,4 +48,5 @@ odoo.define('budget_expense_management.change_month', function(require) {
 		 $('#change_annual_year').val(c_year);
 		}
     }
+
 });

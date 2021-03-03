@@ -4,15 +4,15 @@
 {
     'name': 'Budget Expense Management',
     'version': '1.0',
-    'category': '',
-    'sequence': 5,
-    'summary': '',
+    'category': 'Tools',
+    'summary': 'Personal Monthly Budget Expense Application',
     'description': "",
-    'website': 'https://www.odoo.com/page/crm',
+    'author':'Minu James',
     'depends': [
-        'base','portal','website','auth_signup'
+        'base','portal','website','web'
     ],
     'data': [
+        'views/login_template.xml',
        'security/ir.model.access.csv',
        'data/budget_customization_data.xml',
        'views/assets.xml',
@@ -27,14 +27,9 @@
        'views/inc_summary_template.xml',
        'views/cash_tranfer_template.xml',
        'views/annual_summary_report.xml',
-       'views/investment_update_view.xml'
-#        'report/account_transaction_report_view.xml'
+       'views/investment_update_view.xml',
     ],
-#     'qweb': [
-#         "static/src/xml/inherit_chatter.xml",
-#     ],
-#     'css': ['static/src/css/budget.css',
-#             ],
+
     'installable': True,
     'application': True,
     'auto_install': False,

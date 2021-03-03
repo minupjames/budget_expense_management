@@ -96,7 +96,8 @@ class IncomeSummary(http.Controller):
                     if account_obj and account_obj.name :
                         inc_id.account_journal_id = account_obj.id
                 if data['amount']:
-                    inc_id.amount = float(data['amount'].replace(',',''))
+                    newdata = data['amount'].replace('$','').replace(',','')
+                    inc_id.amount = float(newdata)
         except Exception as exc:
             print(exc)
             Response.status = "400"

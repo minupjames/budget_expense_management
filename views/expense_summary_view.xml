@@ -45,8 +45,6 @@
                     		
                     		<field name="account_journal_id"  required="1"/>
                     		<field name="amount"  required="1" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-<!--                     		<field name="bill_ref" widget="many2many_binary" colspan="2" -->
-<!--                                string="Upload Files" /> -->
                     	</group>
                     </group>
                     <div>
@@ -81,8 +79,7 @@
                <filter string="This Year" name="current_year" domain="[('date','&lt;=', time.strftime('%%Y-12-31')),('date','&gt;=',time.strftime('%%Y-01-01'))]"/>
                <filter string="Date Order" name="date_order" date="date"/>
                <group expand="0" string="Group By">
-<!--                     <filter name="group_name" string="Description" context="{'group_by':'name'}"/>
- -->                    <filter name="group_category" string="Category" context="{'group_by':'exp_category_id'}"/>
+                    <filter name="group_category" string="Category" context="{'group_by':'exp_category_id'}"/>
                     <separator/>
                     <filter name="group_year" string="Year" context="{'group_by':'date:year'}"/>
                     <filter name="group_month" string="Month" context="{'group_by':'date:month'}"/>

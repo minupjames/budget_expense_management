@@ -31,7 +31,7 @@ $(document).ready(function(){
 			$("#dest_account").text(des_account_value);
 			$("#src_account").text(src_account_value);
 			window.history.pushState({}, null, "/cash_transfer");
-			window.location.href = '/my_expenses';
+			window.location.href = '/budget_monthly_rpt/';
 		});
 		
 		XHR.open( "POST", "/cash_transfer", true);

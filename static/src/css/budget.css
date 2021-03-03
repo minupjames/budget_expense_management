@@ -117,7 +117,7 @@ select {
     height: 27px;
     -ms-word-break: normal;
     word-break: normal;
-    padding-left: 22px;
+    padding: 1px 15px 0px 20px;
 }
 
 select.annual_year_dp
