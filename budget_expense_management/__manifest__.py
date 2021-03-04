@@ -7,6 +7,7 @@
     'category': 'Tools',
     'summary': 'Personal Monthly Budget Expense Application',
     'description': "",
+    'website': 'https://github.com/minupjames/budget_expense_management/',
     'license':'LGPL-3',
     'author':'Minu James',
     'depends': [
