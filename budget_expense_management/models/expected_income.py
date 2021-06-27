@@ -68,6 +68,5 @@ class IncomeCategory(models.Model):
     _name = 'income.category'
     
     name = fields.Char('Income Category')
+    income_type = fields.Selection([('invest', 'Investment'), ('savings', 'Savings')], string="Income Type", default='savings')
     show_default = fields.Boolean('Show Default', default=True)
-
-    

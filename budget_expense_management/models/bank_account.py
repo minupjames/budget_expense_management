@@ -39,7 +39,29 @@ class BankAccount(models.Model):
             credit_amount = amount_credited[0]['sum']
         return debit_amount, credit_amount
 
+    def investment_per_month(self, acct, start_date, last_day):
+        debit, credit = self.amount_transfered(acct, start_date, last_day)
+        account_line_id = request.env['bank.account.line'].sudo().search([('bank_id','=',acct.id),
+                                                                          ('year','=',str(last_day.year))])
+        request.env.cr.execute("""select sum(amount) from expense_summary where date >= %s AND date <= %s
+                             AND account_journal_id = %s """,
+                             ((start_date, last_day, acct.id)))
+        total_exp = request.env.cr.dictfetchall()
+        request.env.cr.execute("""select sum(amount) from income_summary where date >= %s AND date <= %s
+                             AND account_journal_id = %s AND income_categ_id != 9
+                            """,
+                             ((start_date, last_day, acct.id)))
+        total_inc = request.env.cr.dictfetchall()
+        if total_inc:
+            total_income = total_inc[0]['sum'] or 0.0
+        if total_exp:
+            total_exp = total_exp[0]['sum'] or 0.0
 
+        if not debit:
+            debit = 0
+        if not credit:
+            credit = 0
+        return total_income + credit - total_exp - debit
 
     def account_balance(self, acct, last_day):
         start_date = date(last_day.year, 1, 1)

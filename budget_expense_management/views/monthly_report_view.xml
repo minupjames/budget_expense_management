@@ -140,7 +140,7 @@
                     <div class="col-lg-4" >
                         <h4  class="card-header bar text-center">Expenses</h4>
                         <div class="table-responsive ">
-                            <table class="table" border="1" style="border:1px solid #a0783bd1;" id="expense">
+                            <table class="table" border="1" style="border:1px solid #dee2e6;" id="expense">
                                  <thead>
                                     <tr >
                                         <th style="border-right:1px solid #dee2e6;">Category</th>
@@ -219,7 +219,30 @@
                               </tbody>
                         </table>
                     </div>
-                </div>
+	    </div>
+                    <h4  style="background-color:#A49D80; color:white" class="card-header text-center">Investment</h4>
+                    <div class="table-responsive">
+                        <table class="table" border="1" style="border:1px solid #dee2e6;">
+                            <thead>
+                                <tr >
+                                <th style="border-right:1px solid #dee2e6;">Category</th>
+                                    <th style="border-right:1px solid #dee2e6;">Total</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                    <t t-foreach='investment_details.keys()' t-as='inv'>
+                                      <tr>
+                                        <td style="border-right:1px solid #dee2e6;"><t t-esc="inv"/></td>
+                                        <td style="border-right:1px solid #dee2e6;"><t t-esc="round(investment_details[inv])"/></td>
+                                      </tr>
+                                    </t>
+                                     <tr style="background-color:#A49D80; color:white" class="card-footer ">
+                                    <td style="border-right:1px solid #A49D80;"><strong>Total</strong></td>
+                                        <td style="border-right:1px solid #A49D80; font-weight:bold;">$<t  t-esc="round(investment)" /> </td>
+                                      </tr>
+                              </tbody>
+                        </table>
+                    </div>
                        <t t-set="monthly_income" t-value="sum([income_details[inc]['actual'] for inc in income_details.keys()])" />
                             <t t-set="monthly_spent" t-value="sum([exp_categories[exp]['spent'] for exp in exp_categories.keys()])" />
                              <div class="table-responsive savings_summary_box">
@@ -232,14 +255,6 @@
                                 </table>
                             </div>
 
-                             <div class="table-responsive savings_summary_box invest">
-                                <table>
-                                    <tbody>
-                                        <p><span style= "font-size: 15px; font-style: italic;">Total investment this month</span></p>
-                                        <tr><span style="font-weight:bold; font-size: 22px;">$<t t-esc="investment"/></span></tr>
-                                    </tbody>
-                                </table>
-                            </div>
                 </div>
                 <div class="col-lg-4" >
                     <h4  class="card-header bg-secondary text-center">Accounts</h4>

@@ -99,7 +99,8 @@ class BudgetMonthlyReport(http.Controller):
             income_ids = request.env['income.summary'].search([
                                                           ('date','>=', first_day),
                                                           ('date','<=', last_day),
-                                                          ('income_categ_id','=',inc_categ.id)])
+                                                          ('income_categ_id','=',inc_categ.id),
+                                                          ('account_journal_id.type', '!=', 'investment')])
             for inc in income_ids:
                 sum += inc.amount
             if sum == 0:
@@ -127,13 +128,15 @@ class BudgetMonthlyReport(http.Controller):
      
     def get_monthly_investment(self, first_day, last_day):
         accounts = request.env['bank.account'].sudo().search([('type','=','investment')])
-        sum = 0
+        inv_sum_total = 0
+        inv_details = {}
         for acct in accounts:
-            debit, credit = acct.amount_transfered(acct, first_day, last_day)
-            sum += (credit or 0)
-            sum -= (debit or 0)
-        return sum
-            
+            inv_sum = acct.investment_per_month(acct, first_day, last_day)
+            if inv_sum != 0:
+                inv_details[acct.name] = inv_sum
+            inv_sum_total += inv_sum
+        return inv_sum_total, inv_details
+
     @http.route('/budget_monthly_rpt/', type = 'http', auth='user', methods=['GET'], website=True)
     def render_budget_monthly_rpt(self, **kwargs):
         vals = {}
@@ -156,6 +159,8 @@ class BudgetMonthlyReport(http.Controller):
             first_day = date(int(current_year), today.month, 1)
             last_day_of_month = calendar.monthrange(int(current_year), today.month)[1]
             last_day = date(int(current_year), today.month, last_day_of_month)
+
+        investment, investment_details = self.get_monthly_investment(first_day, last_day)
         vals = {'month': self.get_all_months(),
                      'current_month': current_month,
                      'years':years,
@@ -163,7 +168,8 @@ class BudgetMonthlyReport(http.Controller):
                      'exp_categories': self._get_spent_expense(first_day,last_day),
                      'income_details': self.get_income(first_day,last_day),
                      'account_details': self.get_account_details(first_day, last_day),
-                     'investment': self.get_monthly_investment(first_day, last_day),
+                     'investment_details': investment_details,
+                     'investment': investment,
                      'currency': request.env.user.currency_id}
         
         return request.render("budget_expense_management.budget_montly_report_template", vals)
@@ -289,7 +295,7 @@ class BudgetMonthlyReport(http.Controller):
         total_investment = 0
         for month in months:
             first_day, last_day = self.get_first_and_last_day(month, year)
-            invest_per_month = self.get_monthly_investment(first_day, last_day)
+            invest_per_month, _ = self.get_monthly_investment(first_day, last_day)
             investment_list.append(round(invest_per_month))
             total_investment += invest_per_month
         return {'Investment':  (investment_list, round(total_investment), round(total_investment/12))}
