@@ -221,7 +221,6 @@ class BudgetMonthlyReport(http.Controller):
         for acct in account_ids:
             current_balance += acct.account_balance(acct, today)
         return round(current_balance)   
-        
     
     def total_summary(self, year):
         months = self.get_all_months()
@@ -235,6 +234,7 @@ class BudgetMonthlyReport(http.Controller):
         total_summary['Income'] = ()
         total_summary['Expense'] = ()
         total_summary['Net Savings'] = ()
+        cur_month = datetime.now().month
         
         for month in months:
             first_day, last_day = self.get_first_and_last_day(month, year)
@@ -259,9 +259,9 @@ class BudgetMonthlyReport(http.Controller):
             expense_sum += exp   
         for savings in savings_list:
             savings_sum += savings         
-        total_summary['Income'] = (income_list, round(income_sum), round(income_sum/12))
-        total_summary['Expense'] = (expense_list, round(expense_sum), round(expense_sum/12))
-        total_summary['Net Savings'] = (savings_list, round(savings_sum), round(savings_sum/12))
+        total_summary['Income'] = (income_list, round(income_sum), round(income_sum/cur_month))
+        total_summary['Expense'] = (expense_list, round(expense_sum), round(expense_sum/cur_month))
+        total_summary['Net Savings'] = (savings_list, round(savings_sum), round(savings_sum/cur_month))
         
         return total_summary 
    
@@ -269,6 +269,7 @@ class BudgetMonthlyReport(http.Controller):
         months = self.get_all_months()
         inc_categ_ids = request.env['income.category'].sudo().search([])
         income_summary = {}
+        cur_month = datetime.now().month
         for inc in inc_categ_ids:
             inc_summ_list = []
             income_sum = 0
@@ -284,7 +285,7 @@ class BudgetMonthlyReport(http.Controller):
                 inc_summ_list.append(round(sum))
             for monthly_income in inc_summ_list:
                 income_sum += monthly_income
-            income_summary.update({inc.name: (inc_summ_list, income_sum, round(income_sum/12))})
+            income_summary.update({inc.name: (inc_summ_list, income_sum, round(income_sum/cur_month))})
         return income_summary
     
     def annual_investment_summary(self, year):
@@ -293,18 +294,20 @@ class BudgetMonthlyReport(http.Controller):
         inv_total = ()
         investment_list = []
         total_investment = 0
+        cur_month = datetime.now().month
         for month in months:
             first_day, last_day = self.get_first_and_last_day(month, year)
             invest_per_month, _ = self.get_monthly_investment(first_day, last_day)
             investment_list.append(round(invest_per_month))
             total_investment += invest_per_month
-        return {'Investment':  (investment_list, round(total_investment), round(total_investment/12))}
+        return {'Investment':  (investment_list, round(total_investment), round(total_investment/cur_month))}
     
     def annual_expense_summary(self, year):
         months = self.get_all_months()
         exp_categ_ids = request.env['expense.category'].sudo().search([])
         expense_summary = {}
         
+        cur_month = datetime.now().month
         for exp in exp_categ_ids:
             exp_summ_list = []
             expense_sum = 0
@@ -320,7 +323,7 @@ class BudgetMonthlyReport(http.Controller):
                 exp_summ_list.append(round(sum))
             for monthly_expense in exp_summ_list:
                 expense_sum += monthly_expense
-            expense_summary.update({exp.name: (exp_summ_list, expense_sum, round(expense_sum/12))})
+            expense_summary.update({exp.name: (exp_summ_list, expense_sum, round(expense_sum/cur_month))})
         return expense_summary
 
     @http.route('/annual_summary/', type = 'http', auth='user', methods=['GET'], website=True)
