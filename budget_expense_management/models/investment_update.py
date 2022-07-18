@@ -31,7 +31,7 @@ class InvestmentInterest(models.Model):
             })
         return res
     
-    @api.multi
+    #@api.multi
     def unlink(self):
         for interest in self:
             income_summary = self.env['income.summary'].search([('investment_id','=',self.id)])

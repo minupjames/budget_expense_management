@@ -60,7 +60,6 @@
         <field name="name">Budgeted Expense</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">budgeted.expense</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -113,7 +112,6 @@
         <field name="name">Expense Category</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">expense.category</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
