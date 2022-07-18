@@ -46,6 +46,7 @@
 		<field name="type">ir.actions.act_window</field>
 		<field name="res_model">account.money.transfer</field>
 		<field name="search_view_id" ref="budget_expense_management.view_account_money_transfer_filter"  />
+		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
 		
 	</record>
@@ -83,6 +84,7 @@
 			<field name="name">Year</field>
 			<field name="type">ir.actions.act_window</field>
 			<field name="res_model">budget.year</field>
+			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
 

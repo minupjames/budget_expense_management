@@ -300,6 +300,7 @@
                 <field name="name">Montly Report</field>
                 <field name="type">ir.actions.act_url</field>
                 <field name="target">self</field>
+                <field name="domain"></field>
                 <field name="url">/budget_monthly_rpt/</field>
         </record>
     <menuitem id="monthly_summary_menu" name="Summary" action="monthly_report_action" string="Monthly Report"  parent="budget" />

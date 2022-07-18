@@ -57,6 +57,7 @@
 	    <field name="name">Expected Income</field>
 	    <field name="type">ir.actions.act_window</field>
 	    <field name="res_model">expected.income</field>
+	    <field name="view_type">form</field>
 	    <field name="view_mode">tree,form</field>	    
 	</record>
 
@@ -104,6 +105,7 @@
 	    <field name="name">Income Category</field>
 	    <field name="type">ir.actions.act_window</field>
 	    <field name="res_model">income.category</field>
+	    <field name="view_type">form</field>
 	    <field name="view_mode">tree,form</field>	    
 	</record>
 	
