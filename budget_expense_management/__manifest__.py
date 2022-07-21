@@ -3,7 +3,7 @@
 
 {
     'name': 'Budget Expense Management',
-    'version': '1.0',
+    'version': '13.0.0.1',
     'category': 'Tools',
     'summary': 'Personal Monthly Budget Expense Application',
     'description': "",
