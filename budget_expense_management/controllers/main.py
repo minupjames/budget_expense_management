@@ -110,6 +110,7 @@ class BudgetMonthlyReport(http.Controller):
         
     def get_account_details(self, first_day, last_day):
         account_dict = {}
+        acct_type_dict = {}
         account_ids = request.env['bank.account'].sudo().search([])
         for acct in account_ids:
             sum = 0
@@ -121,10 +122,21 @@ class BudgetMonthlyReport(http.Controller):
             current_balance = acct.account_balance(acct, last_day)
             if not exp[0]['sum'] and not current_balance:
                 continue
-            
             account_dict.update({acct: {'amt_spent': exp[0]['sum'] or 0, 'balance':current_balance or 0}})
-        return account_dict   
-     
+        return account_dict  
+
+    def get_acct_type_balance(self, first_day, last_day):
+        account_dict = self.get_account_details(first_day, last_day)
+        acct_type_dict = {}
+        acct_type_dict['savings'] = 0.0
+        acct_type_dict['investment'] = 0.0
+        for acct, value in account_dict.items():
+            if acct.type in ['checking','saving','investment']:
+                if acct.type in ['checking','saving']:
+                    acct_type_dict['savings'] += value['balance']
+                else:
+                    acct_type_dict['investment'] += value['balance']
+        return  acct_type_dict
      
     def get_monthly_investment(self, first_day, last_day):
         accounts = request.env['bank.account'].sudo().search([('type','=','investment')])
@@ -159,7 +171,6 @@ class BudgetMonthlyReport(http.Controller):
             first_day = date(int(current_year), today.month, 1)
             last_day_of_month = calendar.monthrange(int(current_year), today.month)[1]
             last_day = date(int(current_year), today.month, last_day_of_month)
-
         investment, investment_details = self.get_monthly_investment(first_day, last_day)
         vals = {'month': self.get_all_months(),
                      'current_month': current_month,
@@ -168,6 +179,7 @@ class BudgetMonthlyReport(http.Controller):
                      'exp_categories': self._get_spent_expense(first_day,last_day),
                      'income_details': self.get_income(first_day,last_day),
                      'account_details': self.get_account_details(first_day, last_day),
+                     'account_type_balance': self.get_acct_type_balance(first_day, last_day),
                      'investment_details': investment_details,
                      'investment': investment,
                      'currency': request.env.user.currency_id}

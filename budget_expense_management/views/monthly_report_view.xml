@@ -117,8 +117,8 @@
                     <input type="hidden" t-att-value="current_year" id="current_year"/>
                           <h4 style="color:#417c8a;" >
                            <select id="change_month" class="new" style="font-size: 1rem;width:30%;  height: 32px;">
-                                <t t-foreach='month' t-as='m'>
-                                    <option t-value="m" t-att-selected="m == current_month">
+				   <t t-foreach='month' t-as='m'>
+                                    <option t-att-value="m" t-att-selected="m == current_month">
                                         <t t-esc='m' />
                                     </option>
                                 </t>
@@ -177,7 +177,27 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+        
+                    <h4  class="card-header bg-secondary text-center">Account Types</h4>
+                    <div class="table-responsive ">
+			<table class="table" border="1" style="border:1px solid #dee2e6;">
+                            <thead>
+                                <tr >
+                                    <th style="border-right:1px solid #dee2e6;"></th>
+                                    <th style="border-right:1px solid #dee2e6;">Total</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                    <t t-foreach='account_type_balance.keys()' t-as='acc_type'>
+                                       <tr>
+                                        <td style="border-right:1px solid #dee2e6;text-transform:capitalize;"><t t-esc="acc_type"/></td>
+                                        <td style="border-right:1px solid #dee2e6;">$<t t-esc="round(account_type_balance[acc_type])"/></td>
+                                      </tr>
+                                    </t>
+                              </tbody>
+			    </table> 
+                    </div>
+                  </div>
 
                 <div class="col-lg-4" >
                     <div>
@@ -289,9 +309,10 @@
                               </tbody>
                             </table>
                     </div>
-                </div>
-                </div>
-                </div>
+	    </div>
+            </div>
+	</div>
+	
             </div>
          </t>
      </template>
