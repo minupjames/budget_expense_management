@@ -18,27 +18,28 @@ odoo.define('budget_expense_management.myexpenses', function(require){
             xhttp.send(data);
         })
 
-        $('td').on('click', function() {
-            if ('text-right td_marked' == ($(this).context.className)) {
-                var accounts = $("#all_account_ids").val();
-                var choices = JSON.parse(accounts.replace(/'/g, '"'));
-                if ($(this).context.id === 'acct') {
-                    $(this).prop('contenteditable', false);
-                    $(this).addClass('td_marked');
-                    $(this).context.parentNode.cells[4].childNodes[1].style.display = "none";
-                    $(this).context.parentNode.cells[4].childNodes[3].style.display = "inline-block";
-                }
-                if ($(this).context.id === 'catg') {
-                    $(this).prop('contenteditable', false);
-                    $(this).addClass('td_marked');
-                    $(this).context.parentNode.cells[1].childNodes[1].style.display = "none";
-                    $(this).context.parentNode.cells[1].childNodes[3].style.display = "inline-block";
-                }
+	       $('td').on('click', function() {
+     	           if ('td_marked' in  ($(this)[0].classList)) {
+     	               var accounts = $("#all_account_ids").val();
+     	               var choices = JSON.parse(accounts.replace(/'/g, '"'));
+     	               if ($(this).context.id === 'acct') {
+     	                   $(this).prop('contenteditable', false);
+     	                   $(this).addClass('td_marked');
+     	                   $(this).context.parentNode.cells[4].childNodes[1].style.display = "none";
+     	                   $(this).context.parentNode.cells[4].childNodes[3].style.display = "inline-block";
+     	               }
+     	               if ($(this).context.id === 'catg') {
+     	                   $(this).prop('contenteditable', false);
+     	                   $(this).addClass('td_marked');
+     	                   $(this).context.parentNode.cells[1].childNodes[1].style.display = "none";
+     	                   $(this).context.parentNode.cells[1].childNodes[3].style.display = "inline-block";
+     	               }
 
-            }
-            });
+     	           }
+     	           });
         $('button[name="edit_exp"]').on('click', function() {
             var currentTD = $(this).closest('tr').find('td').not(':nth-child(8), :nth-child(7), :nth-child(9)');
+	    console.log('-edit exp--$(this)',$(this));
             var td_date = $(this).closest('tr').find('td')[0];
             $('tr').removeClass('marked');
             $("td").removeClass('td_marked');
@@ -73,6 +74,7 @@ odoo.define('budget_expense_management.myexpenses', function(require){
             var date_td = all_tds[0];
             var account_td= all_tds[4];
             var category_td= all_tds[1];
+	    console.log('--category_td----',category_td, category_td.children[1]);
             var xhttp = new XMLHttpRequest();
             var currentTD = $(this).closest('tr').find('td').not(':nth-child(8), :nth-child(7), :nth-child(9)');
             $.each(currentTD, function () {

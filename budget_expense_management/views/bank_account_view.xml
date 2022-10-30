@@ -22,7 +22,7 @@
                             <field name="name" required="1"/>
                         </group>
                         <group>
-                            <field name="type" required="1"/>
+                            <field name="type_id" required="1"/>
                         </group>
                     </group>
                     <notebook>
@@ -64,4 +64,12 @@
         <field name="view_mode">tree,form</field>        
     </record>
     
+    <record id="action_bank_account_type" model="ir.actions.act_window">
+	<field name="name">Bank Account Type</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">bank.account.type</field>
+	<field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="action_bank_account_type_id" string="Account Types"  action="action_bank_account_type"  parent="menu_budget_config" />
 </odoo>

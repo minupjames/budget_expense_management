@@ -89,7 +89,7 @@ class BudgetMonthlyReport(http.Controller):
 
     def get_income(self, first_day,last_day):
         inc_categ_dict = {}
-        inc_category_ids = request.env['income.category'].sudo().search([])
+        inc_category_ids = request.env['income.category'].sudo().search([('name', '!=', 'Investment Interest')])
         exp_income_monthly_id = request.env['expected.income'].search([('date_from','>=',first_day),
                                                                 ('date_to','<=',last_day)])
         for inc_categ in inc_category_ids:
@@ -100,7 +100,7 @@ class BudgetMonthlyReport(http.Controller):
                                                           ('date','>=', first_day),
                                                           ('date','<=', last_day),
                                                           ('income_categ_id','=',inc_categ.id),
-                                                          ('account_journal_id.type', '!=', 'investment')])
+                                                          ('account_journal_id.type_id.name', '!=', 'investment')])
             for inc in income_ids:
                 sum += inc.amount
             if sum == 0:
@@ -131,15 +131,15 @@ class BudgetMonthlyReport(http.Controller):
         acct_type_dict['savings'] = 0.0
         acct_type_dict['investment'] = 0.0
         for acct, value in account_dict.items():
-            if acct.type in ['checking','saving','investment']:
-                if acct.type in ['checking','saving']:
+            if acct.type_id.name in ['Checking','Saving','Investment']:
+                if acct.type_id.name in ['Checking','Saving']:
                     acct_type_dict['savings'] += value['balance']
                 else:
                     acct_type_dict['investment'] += value['balance']
         return  acct_type_dict
      
     def get_monthly_investment(self, first_day, last_day):
-        accounts = request.env['bank.account'].sudo().search([('type','=','investment')])
+        accounts = request.env['bank.account'].sudo().search([('type_id.name','=','investment')])
         inv_sum_total = 0
         inv_details = {}
         for acct in accounts:
@@ -225,10 +225,10 @@ class BudgetMonthlyReport(http.Controller):
     def account_sum(self, investment_acc=True):
         today = fields.Date.today()
         if investment_acc:  
-            account_ids = request.env['bank.account'].sudo().search([('type', '=', 'investment')])
+            account_ids = request.env['bank.account'].sudo().search([('type_id.name', '=', 'investment')])
         else:
-            account_ids = request.env['bank.account'].sudo().search([('type', '!=', 'investment'),
-                                                                     ('type', '!=', 'loan')])
+            account_ids = request.env['bank.account'].sudo().search([('type_id.name', '!=', 'investment'),
+                                                                     ('type_id.name', '!=', 'loan')])
         current_balance = 0
         for acct in account_ids:
             current_balance += acct.account_balance(acct, today)
