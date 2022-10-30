@@ -17,9 +17,9 @@ class BankAccount(models.Model):
                              ('saving','Saving'),
                              ('checking','Checking'),
                              ('loan','Loan'),
-                             ('credit', 'Credit Card')])
+                             ('credit', 'Credit Card')], string="Type(old)")
     yearly_opening_balance_ids = fields.One2many('bank.account.line', 'bank_id', 'Opening Balance')
-
+    type_id = fields.Many2one('bank.account.type', string='Type')
 
     def amount_transfered(self, acct, start_date, last_day):
         debit_amount = amount_credited = 0
@@ -162,6 +162,11 @@ class BankAccountLine(models.Model):
                     'year': year.id,
                     'initial_balance' : self.account_balance(account,last_day)
                     })
+
+class BankAccountType(models.Model):
+    _name = 'bank.account.type'
+
+    name = fields.Char('Type')
 
 class BudgetYear(models.Model):
     _name = 'budget.year'

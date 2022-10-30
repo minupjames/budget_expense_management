@@ -22,7 +22,7 @@ odoo.define('budget_expense_management.myincomes', function(require){
         })
 
         $('td').on('click', function(e) {
-            if ('text-right td_marked' == ($(this).context.className)) {
+            if ('td_marked' in ($(this)[0].classList)) {
                 if ($(this).context.id === 'income_acct') {
                     $(this).prop('contenteditable', false);
                     $(this).addClass('td_marked');

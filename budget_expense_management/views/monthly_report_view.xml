@@ -117,8 +117,8 @@
                     <input type="hidden" t-att-value="current_year" id="current_year"/>
                           <h4 style="color:#417c8a;" >
                            <select id="change_month" class="new" style="font-size: 1rem;width:30%;  height: 32px;">
-                                <t t-foreach='month' t-as='m'>
-                                    <option t-value="m" t-att-selected="m == current_month">
+				   <t t-foreach='month' t-as='m'>
+                                    <option t-att-value="m" t-att-selected="m == current_month">
                                         <t t-esc='m' />
                                     </option>
                                 </t>
@@ -177,7 +177,32 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+        
+                    <h4  class="card-header bg-secondary text-center">Account Types</h4>
+                    <div class="table-responsive ">
+			<table class="table" border="1" style="border:1px solid #dee2e6;">
+                            <thead>
+                                <tr >
+					<!-- <th style="border-right:1px solid #dee2e6;"></th>
+					<th style="border-right:1px solid #dee2e6;">Total</th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+                                    <t t-foreach='account_type_balance.keys()' t-as='acc_type'>
+                                       <tr>
+                                        	<td style="border-right:1px solid #dee2e6;text-transform:capitalize;"><t t-esc="acc_type"/></td>
+                                        	<td style="border-right:1px solid #dee2e6;">$<t t-esc="round(account_type_balance[acc_type])"/></td>
+					</tr>
+
+                                    </t>
+                                        <tr class="card-footer bg-secondary">
+                                            <td style="border-right:1px solid #875A7B;"><strong>Total</strong></td>
+                                            <td style="border-right:1px solid #875A7B; font-weight:bold;">$<t t-esc="round(sum([account_type_balance[type] for type in account_type_balance.keys()]))" /> </td>
+                                     </tr>
+                              </tbody>
+			    </table> 
+                    </div>
+                  </div>
 
                 <div class="col-lg-4" >
                     <div>
@@ -263,6 +288,7 @@
                             <thead>
                                 <tr >
                                     <th style="border-right:1px solid #dee2e6;">Account name</th>
+                                    <th style="border-right:1px solid #dee2e6;">Type</th>
                                     <th style="border-right:1px solid #dee2e6;">Spent</th>
                                     <th >Balance</th>
 
@@ -272,6 +298,7 @@
                                     <t t-foreach='account_details.keys()' t-as='acc'>
                                        <tr>
                                         <td style="border-right:1px solid #dee2e6;"><t t-esc="acc.name"/></td>
+                                        <td style="border-right:1px solid #dee2e6;"><t t-esc="acc.type_id.name"/></td>
                                         <td style="border-right:1px solid #dee2e6;">$<t t-esc="round(account_details[acc]['amt_spent'])"/></td>
 
                                         <t t-set="balance" t-value="'%.2f'% account_details[acc]['balance']"/>
@@ -283,15 +310,17 @@
                                     </t>
                                      <tr class="card-footer bg-secondary">
                                             <td style="border-right:1px solid #875A7B;"><strong>Total</strong></td>
+                                            <td style="border-right:1px solid #875A7B;"></td>
                                             <td style="border-right:1px solid #875A7B; font-weight:bold;">$<t t-esc="round(sum([account_details[acct]['amt_spent'] for acct in account_details.keys()]))" /> </td>
                                                     <td style="border-right:1px solid #875A7B; font-weight:bold;">$<t t-esc="round(sum([account_details[acct]['balance'] for acct in account_details.keys()]))" /> </td>
                                      </tr>
                               </tbody>
                             </table>
                     </div>
-                </div>
-                </div>
-                </div>
+	    </div>
+            </div>
+	</div>
+	
             </div>
          </t>
      </template>
@@ -300,7 +329,6 @@
                 <field name="name">Montly Report</field>
                 <field name="type">ir.actions.act_url</field>
                 <field name="target">self</field>
-                <field name="domain"></field>
                 <field name="url">/budget_monthly_rpt/</field>
         </record>
     <menuitem id="monthly_summary_menu" name="Summary" action="monthly_report_action" string="Monthly Report"  parent="budget" />

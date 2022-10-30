@@ -12,4 +12,5 @@ access_account_money_transfer,account.money.transfer,model_account_money_transfe
 access_bank_account,bank.account,model_bank_account,,1,1,1,1
 access_bank_account_line,bank.account.line,model_bank_account_line,,1,1,1,1
 access_investment_interest,investment.interest,model_investment_interest,,1,1,1,1
+access_bank_account_type,bank.account.type,model_bank_account_type,,1,1,1,1
 
